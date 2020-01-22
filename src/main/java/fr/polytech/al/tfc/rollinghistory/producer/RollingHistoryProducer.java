@@ -2,7 +2,7 @@ package fr.polytech.al.tfc.rollinghistory.producer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fr.polytech.al.tfc.account.model.Cap;
+import fr.polytech.al.tfc.rollinghistory.model.Cap;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.stereotype.Component;
