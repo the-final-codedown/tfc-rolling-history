@@ -1,6 +1,7 @@
 package fr.polytech.al.tfc.rollinghistory.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import fr.polytech.al.tfc.rollinghistory.model.Transaction;
 import fr.polytech.al.tfc.rollinghistory.repository.TransactionRepository;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;

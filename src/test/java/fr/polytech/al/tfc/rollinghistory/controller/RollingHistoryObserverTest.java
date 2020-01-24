@@ -1,12 +1,11 @@
 package fr.polytech.al.tfc.rollinghistory.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import fr.polytech.al.tfc.account.controller.TransactionController;
-import fr.polytech.al.tfc.account.controller.TransactionControllerQueue;
-import fr.polytech.al.tfc.account.model.Account;
-import fr.polytech.al.tfc.account.model.AccountType;
-import fr.polytech.al.tfc.account.model.Transaction;
-import fr.polytech.al.tfc.account.repository.AccountRepository;
+import fr.polytech.al.tfc.rollinghistory.model.Account;
+import fr.polytech.al.tfc.rollinghistory.model.AccountType;
+import fr.polytech.al.tfc.rollinghistory.model.Transaction;
+import fr.polytech.al.tfc.rollinghistory.repository.AccountRepository;
+import fr.polytech.al.tfc.rollinghistory.repository.TransactionRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +24,6 @@ import static org.junit.Assert.assertTrue;
 @SpringBootTest
 public class RollingHistoryObserverTest {
 
-
     @MockBean
     private TransactionControllerQueue transactionControllerQueue;
 
@@ -38,7 +36,7 @@ public class RollingHistoryObserverTest {
     private AccountRepository accountRepository;
 
     @Autowired
-    private TransactionController transactionController;
+    private TransactionRepository transactionRepository;
 
 
     @Before
@@ -49,8 +47,8 @@ public class RollingHistoryObserverTest {
         Transaction transaction1 = new Transaction(idAccount1, idAccount2, 29, LocalDateTime.now());
         Transaction transaction2 = new Transaction(idAccount1, idAccount2, 29, LocalDateTime.now().minusDays(7));
 
-        transactionController.addTransaction(transaction1);
-        transactionController.addTransaction(transaction2);
+        transactionRepository.save(transaction1);
+        transactionRepository.save(transaction2);
     }
 
     @Test
