@@ -2,6 +2,7 @@ package fr.polytech.al.tfc.rollinghistory.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import fr.polytech.al.tfc.rollinghistory.model.Account;
+import fr.polytech.al.tfc.rollinghistory.model.AccountType;
 import fr.polytech.al.tfc.rollinghistory.model.Cap;
 import fr.polytech.al.tfc.rollinghistory.model.Transaction;
 import fr.polytech.al.tfc.rollinghistory.producer.RollingHistoryProducer;
@@ -31,7 +32,7 @@ public class RollingHistoryObserver {
     @Scheduled(fixedDelay = 5000)
     public void processHistory() throws JsonProcessingException {
         System.out.println("Processing history");
-        List<Account> accounts = accountRepository.findAll();
+        List<Account> accounts = accountRepository.findAllByAccountType(AccountType.CHECK);
         for (Account account : accounts) {
             List<Transaction> window = transactionRepository.findAllBySourceAndDateAfter(account.getAccountId(), LocalDateTime.now().minusDays(7));
             Integer windowAmount = window.stream()
