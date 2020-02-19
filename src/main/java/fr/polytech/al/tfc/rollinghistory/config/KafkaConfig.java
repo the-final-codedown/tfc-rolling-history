@@ -17,19 +17,6 @@ import java.util.Map;
 public class KafkaConfig {
     private static final String app = "kafka-account";
     @Bean
-    public KafkaConsumer<String, String> consumer(@Value("${kafkabroker}") String kafkaBrokers){
-
-        String groupId = String.format("%s", app);
-
-        Map<String, Object> config = new HashMap<>();
-        config.put(CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG, kafkaBrokers);
-        config.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
-
-        StringDeserializer deserializer = new StringDeserializer();
-
-        return new KafkaConsumer<>(config, deserializer, deserializer);
-    }
-    @Bean
     public KafkaProducer<String,String> producer(@Value("${kafkabroker}") String kafkaBrokers){
         Map<String, Object> config = new HashMap<>();
         config.put(CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG, kafkaBrokers);
